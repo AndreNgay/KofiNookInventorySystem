@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,27 +14,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        
-        \App\Models\User::factory()->create([
-            'username' => 'e',
-            'role' => 'employee',
-            'name' => 'e',
-            'email' => 'e@e',
-            'password' => Hash::make('eeeeeeee'),
+        $this->call([
+            CategorySeeder::class,
+            UnitSeeder::class,
+            InventorySeeder::class,
         ]);
 
-        \App\Models\User::factory()->create([
+        User::create([
+            'username' => 'e',
+            'password' => Hash::make('eeeeeeee'),
+            'role' => 'employee',
+            'email' => 'e@e',
+            'first_name' => 'andre the',
+            'last_name' => 'employee',
+            'address' => 'address',
+            'contact_number' => '09123456789',
+            'emergency_contact' => '09123456789',
+        ]);
+
+        User::create([
             'username' => 'o',
-            'role' => 'owner',
-            'name' => 'o',
-            'email' => 'o@o',
             'password' => Hash::make('oooooooo'),
+            'role' => 'owner',
+            'email' => 'o@o',
+            'first_name' => 'andre the',
+            'last_name' => 'owner',
+            'address' => 'address',
+            'contact_number' => '09123456789',
+            'emergency_contact' => '09123456789',
         ]);
     }
 }

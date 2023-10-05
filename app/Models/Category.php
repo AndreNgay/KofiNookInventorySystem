@@ -5,21 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inventory extends Model
+class Category extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'item_name',
-        'image',
+        'category_name',
         'description',
-        'stock',
-        'required_stock',
-        'unit',
-        'cost',
-        'category',
-        'type',
+        
     ];
-
     
+    public $timestamps = false;
 }

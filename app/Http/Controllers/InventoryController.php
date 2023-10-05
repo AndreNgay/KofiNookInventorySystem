@@ -15,12 +15,13 @@ class InventoryController extends Controller
     public function index()
     {
         if (Auth::check()) {
+            $items = Inventory::all();
             $role = Auth::user()->role;
             if ($role === 'employee') {
-                return view('employee.inventory');
+                return view('employee.inventory', compact('items'));
             } elseif ($role === 'owner') {
         
-                return view('owner.inventory');
+                return view('owner.inventory', compact('items'));
             }
         }
         else{

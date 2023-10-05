@@ -17,12 +17,20 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function hasRole($role)
+    {
+        return $this->role == $role;
+    }
+    
     protected $fillable = [
         'username',
         'role',
-        'name',
-        'email',
         'password',
+        'email',
+
+        'address',
+        'contact_number',
+        'emergency_contact'
     ];
 
     /**

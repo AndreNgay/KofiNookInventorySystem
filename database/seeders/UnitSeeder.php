@@ -4,17 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Inventory;
+use App\Models\Unit;
 
-class InventorySeeder extends Seeder
+class UnitSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Inventory::factory()
-        ->count(20)
-        ->create();
+        Unit::factory()
+            ->count(20)
+            ->create();
     }
 }
