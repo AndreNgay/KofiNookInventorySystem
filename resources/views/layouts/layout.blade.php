@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
     @if(Auth::check())
     <nav class="navbar navbar-expand-lg mb-3 bg-wheat">
         <div class="container-fluid">
@@ -51,14 +50,13 @@
                     @endif
                 </ul>
 
-                <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
+                <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="bi bi-person-lines-fill">{{ Auth::user()->first_name }} {{ Auth::user()->last_name  }}</i>
-
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <h5><i>{{ Auth::user()->first_name }}
+                                    {{ Auth::user()->last_name }} <span class="bi bi-person-lines-fill"></span></i></h5>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -80,13 +78,11 @@
     </nav>
     @endif
     @yield('content')
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
 </body>
 
 </html>

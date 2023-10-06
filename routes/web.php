@@ -34,6 +34,9 @@ Auth::routes();
 
 Route::resource('inventory', InventoryController::class);
 
+Route::put('inventory/{inventory}/update-stock', [InventoryController::class, 'updateStock'])
+    ->name('inventory.updateStock');
+
 Route::group(['middleware' => 'is_employee'], function () {
   
 });

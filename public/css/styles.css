@@ -76,3 +76,8 @@ body {
     background: rgb(255, 245, 215);
     background: linear-gradient(54deg, rgba(255, 245, 215, 1) 0%, rgba(229, 197, 114, 1) 100%);
 }
+
+.fixed-width-modal {
+    width: 500px;
+    max-width: 200%;
+}

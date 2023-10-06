@@ -35,7 +35,13 @@ class UnitController extends Controller
      */
     public function store(StoreUnitRequest $request)
     {
-        //
+        $request->validate([
+            'unit_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+        Unit::create($request->all());
+        $unit_name = $request->unit_name;
+        return redirect()->route('unit.index')->with('success', 'Unit: '. $unit_name .'  added successfully');
     }
 
     /**
@@ -59,7 +65,8 @@ class UnitController extends Controller
      */
     public function update(UpdateUnitRequest $request, Unit $unit)
     {
-        //
+        $unit->update($request->all());
+        return redirect()->route('unit.index')->with('success', 'Unit updated successfully');
     }
 
     /**
@@ -67,6 +74,7 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        //
+        $unit->delete();
+        return redirect()->route('unit.index')->with('success', 'Unit deleted successfully');
     }
 }

@@ -24,7 +24,7 @@ class CreateInventoriesTable extends Migration
             $table->float('cost');
             $table->string('type');
 
-            // Foreign keys
+            // foreign keys
             $table->foreign('unit_id')->references('id')->on('units');
             $table->foreign('category_id')->references('id')->on('categories');
         });

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             UnitSeeder::class,
-            InventorySeeder::class,
+        //     InventorySeeder::class,
         ]);
 
         User::create([

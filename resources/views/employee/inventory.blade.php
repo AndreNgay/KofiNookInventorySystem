@@ -1,6 +1,7 @@
 @extends('layouts.layout')
-@include('modals.item.updateItemModal')
+
 @section('content')
+@include('modals.item.updateItemModal')
 <div class="container mt-4 ps-0 pe-0">
     <div class="row mb-3">
         <div class="col-md-6">
@@ -18,6 +19,18 @@
         </div>
     </div>
 
+    <div class="row">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+    </div>
+    
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover">
@@ -49,10 +62,10 @@
 
 
                         <td>
-                        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal"
-                                            data-bs-target="#updateItemModal">
-                                            <span class="bi bi-pencil-square"></span> Update
-                                        </button>
+                            <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal"
+                                data-bs-target="#updateItemModal">
+                                <span class="bi bi-pencil-square"></span> Update
+                            </button>
                         </td>
                     <tr>
                         @endforeach
@@ -62,13 +75,4 @@
 
     </div>
 </div>
-
-
-@endsection
-
-@section('modal')
-
-<!-- Modal -->
-
-
 @endsection

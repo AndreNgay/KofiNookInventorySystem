@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -34,7 +36,13 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $username = Str::random(8);
+        $password = Str::random(12);
+        User::create([
+            'username' => $username,
+            'password' => Hash::make($password),
+        ]);
+        return redirect()->route('account.index')->with('success', 'Account generated successfully. Username: ' . $username . ' Password: ' . $password . '. Please change password immediately');
     }
 
     /**

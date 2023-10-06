@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
+use App\Models\Unit;
 
 class Inventory extends Model
 {
@@ -20,6 +22,14 @@ class Inventory extends Model
         'category',
         'type',
     ];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function unit() {
+        return $this->belongsTo(Unit::class);
+    }
 
     
 }
