@@ -1,40 +1,19 @@
-XAMPP
-1. apache, mysql
-
-Database Setup
-1. php artisan migrate
-2. php artisan db:seed
-
-Start app
-1. php artisan serve
-
-Test Email
-1. register & login for mailtrap.io
-2. home->start testing->integrations
-3. choose laravel 9+
-4. configure .env file by setting the values provided (ex: MAIL_MAILER=smtp
-MAIL_HOST=sandbox.smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=601047876d64bc
-MAIL_PASSWORD=********9df8)
-
-DKNC-IS
-Running and Testing the Website
+DKNC-IS Running and Testing the Website
 
 Prerequisites
 - XAMPP with Apache and MySQL installed.
 - Composer installed.
 
-XAMPP Setup
-1. Install XAMPP and ensure Apache and MySQL are running.
-
-Database Setup
-1. Open a terminal and navigate to the project directory.
-2. Run database migrations: php artisan migrate
-3. Seed the database: php artisan db:seed
-
-Start the Application
-1. Run the following command to start the Laravel development server: php artisan serve
+Cloning the App
+1. Run git clone DKNC-IS
+2. Open XAMPP and run Apache and MySQL
+3. Run composer install
+4. Run cp .env.example .env
+5. Run php artisan key:generate
+6. Run php artisan migrate
+7. Run php artisan db:seed
+8. Run php artisan serve
+9. Go to link localhost:8000
 
 Test Email Functionality using Mailtrap
 1. Register and log in to Mailtrap.

@@ -1,11 +1,11 @@
 @foreach($items as $item)
-<form action="{{ route('inventory.updateStock', ['inventory' => $item->id]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('item.updateStock', ['item' => $item->id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="modal fade" id="updateStockModal{{ $item->id }}" tabindex="-1"
         aria-labelledby="updateStockModal{{ $item->id }}Label" aria-hidden="true">
 
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
 
                 <div class="modal-header">

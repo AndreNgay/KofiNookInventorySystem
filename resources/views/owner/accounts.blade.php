@@ -11,21 +11,18 @@
         <div class="col-md-8">
             <form class="d-flex" role="search">
 
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                    id="searchInventory">
-                <button type="button" class="btn btn-primary" disabled>
+                <input action="{{ route('account.index') }}" method="GET" class="form-control me-2" type="search" placeholder="Search by firtname or lastname" aria-label="Search"
+                id="query" name="query">
+                <button type="submit" class="btn btn-primary">
                     <i class="bi bi-search"></i>
                 </button>
             </form>
         </div>
 
         <div class="col-md-2">
-            <form action="{{ route('account.store') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-primary w-100">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addAccountModal" class="btn btn-primary w-100">
                     <span class="bi bi-plus-square-fill"></span> Generate Account
                 </button>
-            </form>
         </div>
     </div>
 
@@ -67,7 +64,7 @@
                             <th scope="col">Role</th>
                             <th scope="col">Address</th>
                             <th scope="col">Contact Number</th>
-                            <th scope="col">Emergency Number</th>
+                            <th scope="col">Emergency Contact</th>
                             <th scope="col">Email Address</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -82,16 +79,16 @@
                             <td>{{ $user->role }}</td>
                             <td>{{ $user->address }}</td>
                             <td>{{ $user->contact_number }}</td>
-                            <td>{{ $user->emergency_number }}</td>
+                            <td>{{ $user->emergency_contact }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
                                 <div class="d-flex">
                                     <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal"
-                                        data-bs-target="#updateAccountModal">
+                                        data-bs-target="#updateAccountModal{{ $user->id }}">
                                         <span class="bi bi-pencil-square"></span> Update
                                     </button>
                                     <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal"
-                                        data-bs-target="#deleteAccountModal"><span class="bi bi-trash3-fill"></span>
+                                        data-bs-target="#deleteAccountModal{{ $user->id }}"><span class="bi bi-trash3-fill"></span>
                                         Delete
                                     </button>
                                 </div>

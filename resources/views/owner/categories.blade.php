@@ -9,11 +9,10 @@
             <h3 class="">Category Table</h3>
         </div>
         <div class="col-md-8">
-            <form class="d-flex" role="search">
-
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                    id="searchInventory">
-                <button type="button" class="btn btn-primary" disabled>
+            <form action="{{ route('category.index') }}" method="GET" class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search by category name" aria-label="Search"
+                id="query" name="query">
+                <button type="submit" class="btn btn-primary">
                     <i class="bi bi-search"></i>
                 </button>
             </form>

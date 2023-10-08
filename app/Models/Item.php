@@ -6,23 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Unit;
+use App\Models\Type;
 
-class Inventory extends Model
+class Item extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'unit_id',
+        'category_id',
+        'type_id',
         'item_name',
         'image',
         'description',
-        'stock',
-        'required_stock',
-        'unit',
         'cost',
-        'category',
-        'type',
+        'stock',
+        'stock_used_per_day',
+        'created_at',
+        'created_by',
     ];
-
     public function category() {
         return $this->belongsTo(Category::class);
     }
@@ -31,5 +33,8 @@ class Inventory extends Model
         return $this->belongsTo(Unit::class);
     }
 
-    
+    public function type() {
+        return $this->belongsTo(Type::class);
+    }
+    public $timestamps = false;
 }

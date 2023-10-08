@@ -1,7 +1,7 @@
-<form action="{{ route('inventory.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="addItemModalLabel">Add Item</h1>
@@ -26,6 +26,10 @@
                         <input type="number" class="form-control" id="stock" name="stock">
                     </div>
                     <div class="form-group mb-3">
+                        <label for="stock_used_per_day" class="form-label">Stock Used per Day</label>
+                        <input type="number" class="form-control" id="stock_used_per_day" name="stock_used_per_day">
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="required_stock" class="form-label">Required Stock</label>
                         <input type="number" class="form-control" id="required_stock" name="required_stock">
                     </div>
@@ -33,10 +37,18 @@
                         <label for="cost" class="form-label">Cost</label>
                         <input type="number" class="form-control" id="cost" name="cost">
                     </div>
+
                     <div class="form-group mb-3">
-                        <label for="type" class="form-label">Type</label>
-                        <input type="text" class="form-control" id="type" name="type">
+                        <label for="type_id" class="form-label">Type</label>
+                        <select class="form-control" id="type_id" name="type_id">
+                            <option selected>Choose Type</option>
+                            @foreach($types as $type)
+                            <option value="{{ $type->id }}">{{ $type->id }} - {{ $type->type_name }}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
+
                     <div class="form-group mb-3">
                         <label for="unit_id" class="form-label">Unit</label>
                         <select class="form-control" id="unit_id" name="unit_id">

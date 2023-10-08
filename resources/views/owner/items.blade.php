@@ -7,6 +7,7 @@
 @include('modals.item.viewItemHistoryModal')
 @include('modals.item.addItemModal')
 @include('modals.item.deleteItemModal')
+@include('modals.item.viewItemModal')
 
 <div class="container mt-4 ps-0 pe-0">
     <div class="row mb-3">
@@ -14,10 +15,10 @@
             <h3 class="">Inventory Table</h3>
         </div>
         <div class="col-md-6 mb-2">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                    id="searchInventory">
-                <button type="button" class="btn btn-primary" disabled>
+            <form action="{{ route('item.index') }}" method="GET" class="d-flex" role="search">
+                <input class="form-control me-2" type="text" placeholder="Search by item name" aria-label="Search"
+                    id="query" name="query">
+                <button type="submit" class="btn btn-primary">
                     <i class="bi bi-search"></i>
                 </button>
             </form>
@@ -68,14 +69,12 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Item Name</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Required Stock</th>
                             <th scope="col">Unit</th>
-                            <th scope="col">Cost</th>
                             <th scope="col">Category</th>
                             <th scope="col">Type</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Daily Stock Usage</th>
+                            <th scope="col">Cost</th>
                             <th scope="col">Reminder</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -84,22 +83,30 @@
                         @foreach ($items as $item)
                         <tr>
                             <th scope="row">{{ $item->id }}</th>
-                            <td>{{ $item->item_name }}</td>
-                            <td><img class="img-fluid w-100" src="{{ asset('storage/' . $item->image) }}" alt="Image">
+                            <td><button type="button" class="btn btn-link" data-bs-toggle="modal"
+                                    data-bs-target="#viewItemModal{{ $item->id }}"><span
+                                        class="bi bi-eye-fill">{{ $item->item_name }}</span>
+                                </button>
                             </td>
-                            <td>{{ $item->description }}</td>
-                            <td>{{ $item->stock}}</td>
-                            <td>{{ $item->required_stock }}</td>
                             <td>{{ $item->unit->unit_name }}</td>
-                            <td>{{ $item->cost }}</td>
                             <td>{{ $item->category->category_name }}</td>
-                            <td>{{ $item->type }}</td>
-                            @if($item->stock <= 5 && $item->stock >= 0)
-                                <td class="text-danger fw-bold">Restock Today</td>
-                                @elseif($item->stock <= 15 && $item->stock >=6)
-                                    <td class="text-danger fw-bold">Restock in 2 days</td>
-                                    @else
-                                    <td class="text-danger fw-bold">Wag na mag Restock</td>
+                            <td>{{ $item->type->type_name  }}</td>
+                            <td>{{ $item->stock}}</td>
+                            <td>{{ $item->stock_used_per_day }}</td>
+                            <td>₱{{ $item->cost }}</td>
+
+                            @if ($item->stock < $item->stock_used_per_day)
+                                <td><button type="button" class="btn btn-danger w-100" disabled>Restock Today</button>
+                                </td>
+                                @elseif ($item->stock >= $item->stock_used_per_day && $item->stock < $item->
+                                    stock_used_per_day * 2)
+                                    <td><button type="button" class="btn btn-warning w-100" disabled>Restock
+                                            Tomorrow</button></td>
+                                    @elseif ($item->stock >= $item->stock_used_per_day * 2)
+                                    <td><button type="button" class="btn btn-success w-100" disabled>Restock in
+                                            {{ ceil($item->stock / $item->stock_used_per_day) }} days</button></td>
+
+
                                     @endif
 
                                     <td>
@@ -113,7 +120,7 @@
                                                 <span class="bi bi-pencil-square"></span> Update
                                             </button>
                                             <button type="button" class="btn btn-info ms-2" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
+                                                data-bs-target="#viewItemHistoryModal{{ $item->id }}">
                                                 <span class="bi bi-clock-history"></span> History
                                             </button>
                                             <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal"

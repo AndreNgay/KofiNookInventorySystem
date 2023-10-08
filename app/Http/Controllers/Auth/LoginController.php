@@ -29,7 +29,7 @@ class LoginController extends Controller
     // protected $redirecTo = 'inventory.index';
     // protected $redirectTo = RouteServiceProvider::HOME;
 
-    protected $redirectTo = '/inventory';
+    protected $redirectTo = '/item';
 
     /**
      * Create a new controller instance.

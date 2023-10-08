@@ -16,7 +16,7 @@
     @if(Auth::check())
     <nav class="navbar navbar-expand-lg mb-3 bg-wheat">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/inventory">
+            <a class="navbar-brand" href="/item">
                 <img class="navbar-icon" src="media/kofi-nook-icon.jpg" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -29,15 +29,19 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @if(Auth::user()->role == 'owner')
                     <li class="nav-item">
-                        <a class="nav-link" href="/inventory">Inventory</a>
+                        <a class="nav-link" href="/item">Items</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/category">Category</a>
+                        <a class="nav-link" href="/category">Categories</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/unit">Unit</a>
+                        <a class="nav-link" href="/unit">Units</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/type">Types</a>
                     </li>
 
                     <li class="nav-item">

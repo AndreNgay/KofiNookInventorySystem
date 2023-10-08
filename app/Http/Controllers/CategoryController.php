@@ -6,18 +6,27 @@ use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (!Auth::check()) {
+            return view('auth.login');
+        }
+
         $role = Auth::user()->role;
-        if (Auth::check() && $role === 'owner') {
-            $categories = Category::all();
+        $query = $request->input('query');
+        
+        if ($role === 'owner') {
+            $categories = Category::where('category_name', 'LIKE', "%$query%")->get();
             return view('owner.categories', compact('categories'));
+        } elseif ($role === 'employee') {
+            
         }
         return view('auth.login');
     }

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Unit;
-use App\Http\Requests\StoreUnitRequest;
-use App\Http\Requests\UpdateUnitRequest;
+use App\Models\Type;
+use App\Http\Requests\StoreTypeRequest;
+use App\Http\Requests\UpdateTypeRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class UnitController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,14 +23,13 @@ class UnitController extends Controller
         $query = $request->input('query');
         
         if ($role === 'owner') {
-            $units = Unit::where('unit_name', 'LIKE', "%$query%")->get();
-            return view('owner.units', compact('units'));
+            $types = Type::where('type_name', 'LIKE', "%$query%")->get();
+            return view('owner.types', compact('types'));
         } elseif ($role === 'employee') {
             
         }
         return view('auth.login');
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -42,21 +41,20 @@ class UnitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUnitRequest $request)
+    public function store(StoreTypeRequest $request)
     {
         $request->validate([
-            'unit_name' => 'required|string|max:255',
+            'type_name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
         ]);
-        Unit::create($request->all());
-        $unit_name = $request->unit_name;
-        return redirect()->route('unit.index')->with('success', 'Unit: '. $unit_name .'  added successfully');
+        Type::create($request->all());
+        return redirect()->route('type.index')->with('success', 'Type added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Unit $unit)
+    public function show(Type $type)
     {
         //
     }
@@ -64,7 +62,7 @@ class UnitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Unit $unit)
+    public function edit(Type $type)
     {
         //
     }
@@ -72,18 +70,18 @@ class UnitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUnitRequest $request, Unit $unit)
+    public function update(UpdateTypeRequest $request, Type $type)
     {
-        $unit->update($request->all());
-        return redirect()->route('unit.index')->with('success', 'Unit updated successfully');
+        $type->update($request->all());
+        return redirect()->route('type.index')->with('success', 'Type updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Unit $unit)
+    public function destroy(Type $type)
     {
-        $unit->delete();
-        return redirect()->route('unit.index')->with('success', 'Unit deleted successfully');
+        $type->delete();
+        return redirect()->route('type.index')->with('success', 'Type deleted successfully');
     }
 }

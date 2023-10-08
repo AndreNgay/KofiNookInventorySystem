@@ -1,11 +1,11 @@
 @foreach($items as $item)
-<form action="{{ route('inventory.update', ['inventory' => $item->id]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('item.update', ['item' => $item->id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="modal fade" id="updateItemModal{{ $item->id }}" tabindex="-1"
         aria-labelledby="updateItemModal{{ $item->id }}Label" aria-hidden="true">
 
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="updateItemModal{{ $item->id }}Label">Update Item</h1>
@@ -27,7 +27,6 @@
                             </div>
                         </div>
 
-
                     </div>
                     <div class="form-group mb-3">
                         <label for="description" class="form-label">Description</label>
@@ -40,17 +39,26 @@
                         <input type="number" class="form-control" id="stock" name="stock" value="{{ $item->stock }}">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="required_stock" class="form-label">Required Stock</label>
-                        <input type="number" class="form-control" id="required_stock" name="required_stock"
-                            value="{{ $item->required_stock }}">
+                        <label for="stock_used_per_day" class="form-label">Stock Used per Day</label>
+                        <input type="number" class="form-control" id="stock_used_per_day" name="stock_used_per_day"
+                            value="{{ $item->stock_used_per_day }}">
                     </div>
                     <div class="form-group mb-3">
                         <label for="cost" class="form-label">Cost</label>
                         <input type="number" class="form-control" id="cost" name="cost" value="{{ $item->cost }}">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="type" class="form-label">Type</label>
-                        <input type="text" class="form-control" id="type" name="type" value="{{ $item->type }}">
+                        <label for="type_id" class="form-label">Type</label>
+                        <select class="form-control" id="type_id" name="type_id">
+                            @foreach($types as $type)
+                            @if($type->id == $item->type_id)
+                            <option value="{{ $type->id }}" selected>{{ $type->id }} - {{ $type->type_name }}</option>
+                            @else
+                            <option value="{{ $type->id }}">{{ $type->id }} - {{ $type->type_name }}
+                            @endif
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group mb-3">
                         <label for="unit_id" class="form-label">Unit</label>
