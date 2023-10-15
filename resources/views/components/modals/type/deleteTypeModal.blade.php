@@ -14,8 +14,7 @@
                     Are you sure you want to delete this type?
                 </div>
                 <div class="modal-footer bg-wheat">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span
-                            class="bi bi-x-circle-fill"></span> Close</button>
+                    
                     <button type="submit" class="btn btn-danger"><span class="bi bi-trash3-fill"></span> Delete</button>
                 </div>
             </div>

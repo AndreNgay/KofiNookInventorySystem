@@ -6,7 +6,7 @@
         aria-labelledby="updateTypeModal{{ $type->id }}Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-wheat">
                     <h1 class="modal-title fs-5" id="updateTypeModal{{ $type->id }}Label">Update Type</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -20,9 +20,7 @@
                         <input type="text" class="form-control" id="description" name="description" value="{{ $type->description }}">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span
-                            class="bi bi-x-circle-fill"></span> Close</button>
+                <div class="modal-footer bg-wheat">
                     <button type="submit" class="btn btn-success"><span class="bi bi-pencil-square"></span> Save
                         changes</button>
                 </div>
