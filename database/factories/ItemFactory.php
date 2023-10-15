@@ -24,10 +24,10 @@ class ItemFactory extends Factory
             'image' => fake()->image(),
             'description' => fake()->sentence(),
             'cost' => fake()->randomFloat(2, 0, 100),
-            'stock' => fake()->numberBetween(0, 100),
+            'stock' => 0,
             'stock_used_per_day' => fake()->numberBetween(0, 100),
             'created_at' => now(),
-            'created_by' => fake()->name(),
+            'created_by' => fake()->numberBetween(1,2),
         ];
     }
 }

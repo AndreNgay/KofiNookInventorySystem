@@ -1,7 +1,7 @@
 @extends('layouts.layout')
-@include('modals.category.deleteCategoryModal')
-@include('modals.category.updateCategoryModal')
-@include('modals.category.addCategoryModal')
+@include('components.modals.category.deleteCategoryModal')
+@include('components.modals.category.updateCategoryModal')
+@include('components.modals.category.addCategoryModal')
 @section('content')
 <div class="container mt-4 ps-0 pe-0">
     <div class="row mb-3">
@@ -11,7 +11,7 @@
         <div class="col-md-8">
             <form action="{{ route('category.index') }}" method="GET" class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search by category name" aria-label="Search"
-                id="query" name="query">
+                    id="query" name="query">
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-search"></i>
                 </button>
@@ -19,8 +19,9 @@
         </div>
         <div class="col-md-2">
 
-            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-                <span class="bi bi-plus-square-fill"></span> New Category
+            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#addCategoryModal">
+                <span class="bi bi-plus-lg"></span> New Category
             </button>
 
         </div>
@@ -76,7 +77,8 @@
                                         <span class="bi bi-pencil-square"></span> Update
                                     </button>
                                     <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal"
-                                        data-bs-target="#deleteCategoryModal{{ $category->id }}"><span class="bi bi-trash3-fill"></span>
+                                        data-bs-target="#deleteCategoryModal{{ $category->id }}"><span
+                                            class="bi bi-trash3-fill"></span>
                                         Delete
                                     </button>
                                 </div>
@@ -87,7 +89,13 @@
                     </tbody>
                 </table>
             </div>
-
+            
+            <div class="d-flex justify-content-center">
+                {{ $categories->links("pagination::bootstrap-4") }}
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                Showing {{ $categories->firstItem() }} to {{ $categories->lastItem() }} of {{ $categories->total() }} results
+            </div>
         </div>
     </div>
 </div>

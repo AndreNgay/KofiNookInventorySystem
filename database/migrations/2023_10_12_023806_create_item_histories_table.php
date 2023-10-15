@@ -16,6 +16,7 @@ return new class extends Migration
         $table->unsignedBigInteger('item');
         $table->timestamp('updated_on');
         $table->unsignedBigInteger('updated_by');
+        $table->string('action');
 
         $table->foreign('updated_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         $table->foreign('item')->references('id')->on('items')->onUpdate('cascade')->onDelete('cascade');

@@ -5,6 +5,7 @@ use App\Http\Middleware\IsEmployee;
 use App\Http\Middleware\IsOwner;
 use App\Http\Middleware\IsLoggedIn;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ItemBatchController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\TypeController;
@@ -31,14 +32,19 @@ Route::group(['middleware' => 'is_logged_in'], function () {
 });
 
 
+
 Auth::routes();
 
 Route::resource('item', ItemController::class);
+Route::resource('batch', ItemBatchController::class);
 
 // Route::get('/item/search', [ItemController::class, 'search'])->name('item.search');
 
 Route::put('item/{item}/update-stock', [ItemController::class, 'updateStock'])
     ->name('item.updateStock');
+
+Route::put('account/{account}/update-password', [AccountController::class, 'updatePassword'])
+    ->name('account.updatePassword');
 
 Route::group(['middleware' => 'is_employee'], function () {
   

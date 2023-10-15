@@ -17,7 +17,8 @@ class ItemHistory extends Model
     protected $fillable = [
         'item',
         'updated_on',
-        'updated_by'
+        'updated_by',
+        'action',
     ];
 
     public function user() {

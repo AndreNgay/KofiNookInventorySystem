@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $query = $request->input('query');
         
         if ($role === 'owner') {
-            $categories = Category::where('category_name', 'LIKE', "%$query%")->get();
+            $categories = Category::where('category_name', 'LIKE', "%$query%")->paginate(10);
             return view('owner.categories', compact('categories'));
         } elseif ($role === 'employee') {
             

@@ -6,7 +6,6 @@ use App\Events\ItemUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Models\ItemHistory;
-use Illuminate\Support\Facades\Redirect;
 
 class ItemUpdatedListener
 {
@@ -21,6 +20,5 @@ class ItemUpdatedListener
                 'updated_by' => $event->user->id,
             ]);
         }
-        return Redirect::back();
     }
 }

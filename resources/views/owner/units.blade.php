@@ -1,7 +1,7 @@
 @extends('layouts.layout')
-@include('modals.unit.deleteUnitModal')
-@include('modals.unit.updateUnitModal')
-@include('modals.unit.addUnitModal')
+@include('components.modals.unit.deleteUnitModal')
+@include('components.modals.unit.updateUnitModal')
+@include('components.modals.unit.addUnitModal')
 @section('content')
 <div class="container mt-4 ps-0 pe-0">
     <div class="row mb-3">
@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-8">
             <form action="{{ route('unit.index') }}" method="GET" class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search by unit name"
+                <input class="form-control me-2" type="search" placeholder="Search by unit name" aria-label="Search by unit name"
                 id="query" name="query">
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-search"></i>
@@ -20,7 +20,7 @@
 
         <div class="col-md-2">
             <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addUnitModal">
-                <span class="bi bi-plus-square-fill"></span> New Unit
+                <span class="bi bi-plus-lg"></span> New Unit
             </button>
         </div>
     </div>
@@ -87,6 +87,12 @@
                 </table>
             </div>
 
+            <div class="d-flex justify-content-center">
+                {{ $units->links("pagination::bootstrap-4") }}
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                Showing {{ $units->firstItem() }} to {{ $units->lastItem() }} of {{ $units->total() }} results
+            </div>
         </div>
 
     </div>

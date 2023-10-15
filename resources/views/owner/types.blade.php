@@ -1,7 +1,7 @@
 @extends('layouts.layout')
-@include('modals.type.deleteTypeModal')
-@include('modals.type.updateTypeModal')
-@include('modals.type.addTypeModal')
+@include('components.modals.type.deleteTypeModal')
+@include('components.modals.type.updateTypeModal')
+@include('components.modals.type.addTypeModal')
 @section('content')
 <div class="container mt-4 ps-0 pe-0">
     <div class="row mb-3">
@@ -20,7 +20,7 @@
         <div class="col-md-2">
 
             <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addTypeModal">
-                <span class="bi bi-plus-square-fill"></span> New Type
+                <span class="bi bi-plus-lg"></span> New Type
             </button>
 
         </div>
@@ -88,6 +88,12 @@
                 </table>
             </div>
 
+            <div class="d-flex justify-content-center">
+                {{ $types->links("pagination::bootstrap-4") }}
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                Showing {{ $types->firstItem() }} to {{ $types->lastItem() }} of {{ $types->total() }} results
+            </div>
         </div>
     </div>
 </div>

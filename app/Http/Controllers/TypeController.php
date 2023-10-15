@@ -23,7 +23,7 @@ class TypeController extends Controller
         $query = $request->input('query');
         
         if ($role === 'owner') {
-            $types = Type::where('type_name', 'LIKE', "%$query%")->get();
+            $types = Type::where('type_name', 'LIKE', "%$query%")->paginate(10);
             return view('owner.types', compact('types'));
         } elseif ($role === 'employee') {
             

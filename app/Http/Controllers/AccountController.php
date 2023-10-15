@@ -24,7 +24,14 @@ class AccountController extends Controller
         $query = $request->input('query');
         
         if ($role === 'owner') {
-            $users = User::where('first_name', 'LIKE', "%$query%")->orWhere('last_name', 'LIKE', "%$query%")->get();
+            if($query != null) {
+                $users = User::where('first_name', 'LIKE', "%$query%")->orWhere('last_name', 'LIKE', "%$query%")->paginate(10);
+            }
+            else{
+                $users = User::paginate(10);    
+            
+            }
+            
             return view('owner.accounts', compact('users'));
         } elseif ($role === 'employee') {
             
@@ -45,19 +52,32 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $username = Str::random(8);
-        $password = Str::random(12);
-    
-        User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'role' => $request->role,
-            'username' => $username,
-            'password' => Hash::make($password),
-        ]);
-    
-        return redirect()->route('account.index')->with('success', 'Account generated successfully. Username: ' . $username . ' Password: ' . $password . '. Please change password immediately');
+        $amount = (int) $request->input('amount');
+        if ($amount <= 0) {
+            return redirect()->route('account.index')->with('error', 'Invalid amount.');
+        }
+
+        $password = $request->input('password');
+
+        if (Hash::check($password, Auth::user()->password)) {
+            for ($i = 0; $i < $amount; $i++) {
+                $username = Str::random(8);
+                $password = Str::random(12);
+
+                User::create([
+                    'username' => $username,
+                    'password' => Hash::make($password),
+                ]);
+            }
+
+            return redirect()->route('account.index')->with('success', "Accounts ($amount) generated successfully. Please change passwords immediately.");
+        }
+
+        return redirect()->route('account.index')->with('error', 'Incorrect password.');
     }
+
+
+    
     
     
 
@@ -82,26 +102,38 @@ class AccountController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Retrieve the user by ID
-        $user = User::findOrFail($id);
-    
-        // Validate the input
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'role' => 'required|in:employee,owner',
             'address' => 'nullable|string|max:255',
-            'contact_number' => 'nullable|string|max:255',
-            'emergency_contact' => 'nullable|string|max:255',
+            'contact_number' => 'nullable|string|max:12',
+            'emergency_contact' => 'nullable|string|max:12',
         ]);
-    
-        // Update the user
+        
+        $user = User::findOrFail($id);
         $user->update($request->all());
-    
         return redirect()->route('account.index')->with('success', 'Account updated successfully.');
     }
     
+    public function updatePassword(Request $request, string $id)
+    {
+        $request->validate([
+            'current_password' => 'required|string|min:8',
+            'new_password' => 'required|string|min:8',
+            'confirm_password' => 'required|string|min:8|same:new_password',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        if (Hash::check($request->current_password, $user->password)) {
+            $user->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+            return redirect()->route('account.index')->with('success', 'Password updated successfully.');
+        } else {
+            return redirect()->route('account.index')->with('error', 'Incorrect current password.');
+        }
+    }
 
     /**
      * Remove the specified resource from storage.

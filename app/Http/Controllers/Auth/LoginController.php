@@ -26,10 +26,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirecTo = 'inventory.index';
-    // protected $redirectTo = RouteServiceProvider::HOME;
 
-    protected $redirectTo = '/item';
+    protected $redirectTo = 'item';
 
     /**
      * Create a new controller instance.

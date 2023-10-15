@@ -21,14 +21,14 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('address')->nullable();
-            $table->bigInteger('contact_number')->nullable();
-            $table->bigInteger('emergency_contact')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->string('emergency_contact')->nullable();
 
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('created_at')->nullable();
 
             // $table->timestamp('email_verified_at')->nullable();
-            // $table->rememberToken();
+            $table->rememberToken();
 
         });
     }

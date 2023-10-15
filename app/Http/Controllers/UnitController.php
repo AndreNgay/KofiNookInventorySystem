@@ -23,7 +23,7 @@ class UnitController extends Controller
         $query = $request->input('query');
         
         if ($role === 'owner') {
-            $units = Unit::where('unit_name', 'LIKE', "%$query%")->get();
+            $units = Unit::where('unit_name', 'LIKE', "%$query%")->paginate(10);
             return view('owner.units', compact('units'));
         } elseif ($role === 'employee') {
             

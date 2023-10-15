@@ -21,7 +21,7 @@ return new class extends Migration
             $table->binary('image');
             $table->string('description');
             $table->float('cost');
-            $table->bigInteger('stock');
+            $table->bigInteger('stock')->default(0);
             $table->bigInteger('stock_used_per_day');
             
             $table->timestamp('created_at')->useCurrent();

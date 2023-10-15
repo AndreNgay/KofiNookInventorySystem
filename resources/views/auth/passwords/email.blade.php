@@ -35,7 +35,7 @@
 
                     <!-- Submit button -->
                     <div class="mb-3 text-center">
-                        <button type="submit" class="btn-burlywood">
+                        <button type="submit" class="btn-burlywood w-100">
                             {{ __('Send Password Reset Link') }}
                         </button>
                         <a href="{{ route('login') }}" class="regular btn btn-link">

@@ -10,6 +10,7 @@ use App\Models\Unit;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Type;
+use App\Models\ItemBatch;
 use App\Models\ItemHistory;
 use App\Events\ItemUpdated;
 use Illuminate\Http\Request;
@@ -30,15 +31,16 @@ class ItemController extends Controller
         $role = Auth::user()->role;
         $query = $request->input('query');
 
-        $items = Item::where('item_name', 'LIKE', "%$query%")->get();
+        $items = Item::where('item_name', 'LIKE', "%$query%")->paginate(10);
         $units = Unit::all();
         $categories = Category::all();
         $types = Type::all();
+        $item_batches = ItemBatch::all();
 
         if ($role === 'owner') {
-            $item_histories = ItemHistory::orderBy('id', 'desc')->get();
+            $item_histories = ItemHistory::orderBy('id', 'desc')->paginate(10);
             $users = User::all();
-            return view('owner.items', compact('items', 'units', 'categories', 'item_histories', 'users', 'types'));
+            return view('owner.items', compact('items', 'units', 'categories', 'item_histories', 'users', 'types', 'item_batches'));
         } elseif ($role === 'employee') {
             return view('employee.items', compact('items', 'units', 'categories', 'types'));
         }
@@ -148,7 +150,6 @@ class ItemController extends Controller
             'description' => 'required|string|max:255',
             'cost' => 'required|numeric',
             'stock_used_per_day' => 'required|integer',
-            'stock' => 'required|integer',
         ]);
 
     // Handle image upload
@@ -167,12 +168,8 @@ class ItemController extends Controller
         'image' => $imagePath,
         'description' => $request->input('description'),
         'cost' => $request->input('cost'),
-        'stock' => $request->input('stock'),
         'stock_used_per_day' => $request->input('stock_used_per_day'),
     ]);
-
-    // Fire ItemUpdated event
-    event(new ItemUpdated($item, auth()->user()));
 
     return redirect()->route('item.index')->with('success', 'Item updated successfully');
     }

@@ -10,10 +10,11 @@ Cloning the App
 3. Run composer install
 4. Run cp .env.example .env
 5. Run php artisan key:generate
-6. Run php artisan migrate
-7. Run php artisan db:seed
-8. Run php artisan serve
-9. Go to link localhost:8000
+6. php artisan storage:link
+7. Run php artisan migrate
+8. Run php artisan db:seed
+9. Run php artisan serve
+10. Go to link localhost:8000
 
 Test Email Functionality using Mailtrap
 1. Register and log in to Mailtrap.
