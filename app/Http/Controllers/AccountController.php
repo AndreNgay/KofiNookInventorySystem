@@ -68,9 +68,14 @@ class AccountController extends Controller
                     'username' => $username,
                     'password' => Hash::make($password),
                 ]);
+
+                $accounts[] = [
+                    'username' => $username,
+                    'password' => $password,
+                ];
             }
 
-            return redirect()->route('account.index')->with('success', "Accounts ($amount) generated successfully. Please change passwords immediately.");
+            return redirect()->route('account.index')->with('success', "Accounts ($amount) generated successfully. Please change passwords immediately.")->with('accounts', $accounts);
         }
 
         return redirect()->route('account.index')->with('error', 'Incorrect password.');

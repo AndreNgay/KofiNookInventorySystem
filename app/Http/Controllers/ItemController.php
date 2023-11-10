@@ -42,7 +42,7 @@ class ItemController extends Controller
             $users = User::all();
             return view('owner.items', compact('items', 'units', 'categories', 'item_histories', 'users', 'types', 'item_batches'));
         } elseif ($role === 'employee') {
-            return view('employee.items', compact('items', 'units', 'categories', 'types'));
+            return view('employee.items', compact('items', 'units', 'categories', 'types', 'item_batches'));
         }
 
         return view('auth.login');
@@ -174,30 +174,6 @@ class ItemController extends Controller
     return redirect()->route('item.index')->with('success', 'Item updated successfully');
     }
 
-
-    public function updateStock(UpdateItemRequest $request, Item $item)
-    {
-        $request->validate([
-            'amount' => 'required|integer'
-        ]);
-
-        $add_or_reduce_stock = $request->add_or_reduce_stock;
-        $amount = $request->amount;
-
-        if($add_or_reduce_stock == 'add'){
-            $stock = $item->stock + $amount;
-        }
-        elseif($add_or_reduce_stock == 'reduce'){
-            $stock = $item->stock - $amount;
-        }
-        else{
-            return redirect()->route('item.index')->with('error', 'Invalid action');
-        }
-
-        $item->stock = $stock;
-        $item->save();
-        return redirect()->route('item.index')->with('success', 'Stock updated successfully');
-    }
 
     /**
      * Remove the specified resource from storage.

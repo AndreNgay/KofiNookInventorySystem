@@ -36,10 +36,12 @@
                                         data-bs-target="#updateStockModal{{ $item_batch->id }}">
                                         <span class="bi bi-plus-slash-minus"></span> Stock
                                     </button>
+                                    @if(Auth::user()->role == 'owner')
                                     <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal"
                                         data-bs-target="#deleteBatchModal{{ $item_batch->id }}">
                                         <span class="bi bi-trash3-fill"></span> Delete
                                     </button>
+                                    @endif
                                 </td>
                             <tr>
                                 @endif

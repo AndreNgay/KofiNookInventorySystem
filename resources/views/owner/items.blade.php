@@ -4,7 +4,6 @@
 @include('components.modals.item.updateItemModal')
 @include('components.modals.item.viewItemHistoryModal')
 @include('components.modals.item.addItemModal')
-@include('components.modals.item.deleteItemModal')
 @include('components.modals.item.viewItemModal')
 @include('components.modals.batch.addBatchModal')
 

@@ -30,8 +30,13 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="expiration_date" class="form-label">Expiration Date</label>
+                        @if(Auth::user()->role = 'owner')
                         <input type="date" class="form-control" id="expiration_date" name="expiration_date"
                             value="{{ $item_batch->expiration_date }}">
+                        @elseif(Auth::user()->role = 'employee')
+                        <input type="date" class="form-control" id="expiration_date" name="expiration_date"
+                            value="{{ $item_batch->expiration_date }}" disabled>
+                        @endif
                     </div>
                 </div>
 
